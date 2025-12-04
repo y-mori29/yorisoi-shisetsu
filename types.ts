@@ -59,3 +59,38 @@ export interface Patient {
   avatarColor: string;
   records: Record[];
 }
+
+export type VisitType = 'facility' | 'home';
+
+export interface RosterPatient {
+  id: string;
+  name: string;
+  kana: string;
+  room?: string;
+  note?: string;
+}
+
+export interface Facility {
+  id: string;
+  name: string;
+  type: VisitType;
+  address?: string;
+  roster: RosterPatient[];
+}
+
+export interface RoundSegment {
+  id: string;
+  order: number;
+  predictedName: string;
+  transcript: string;
+  clinicalData: ClinicalData;
+  suggestedPatientId?: string;
+}
+
+export interface Round {
+  id: string;
+  date: string; // YYYY-MM-DD
+  timeframe: '午前' | '午後' | '夜間';
+  facilityId: string;
+  segments: RoundSegment[];
+}
